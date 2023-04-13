@@ -32,6 +32,10 @@ class database
         return $this->statement->execute();
     }
 
+    public function bindValue(string $param, mixed $value) {
+        $this->statement->bindValue($param, $value, PDO::PARAM_STR);
+    }
+
     public function resultSet()
     {
         $this->execute();

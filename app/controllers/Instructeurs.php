@@ -17,6 +17,9 @@ class Instructeurs extends BaseController
         $this->view('instructeurs/index', $data);
     }
     public function voertuigen($id) {
-        var_dump($id);
+        $data = [
+            "instructeur" => $this->instructeurModel->getInstructeur($id),
+        ];
+        $this->view("instructeurs/voertuigen", $data);
     }
 }

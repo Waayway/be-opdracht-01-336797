@@ -26,4 +26,13 @@ class InstructeursModel
         $result = $this->db->result();
         return $result->count;
     }
+
+    public function getInstructeur($id)
+    {
+        $sql = "SELECT * FROM instructeurs ins WHERE ins.id = :id";
+        
+        $this->db->query($sql);
+        $this->db->bindValue(":id", $id);
+        return $this->db->result();
+    }
 }
