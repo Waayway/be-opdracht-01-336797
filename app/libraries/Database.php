@@ -17,7 +17,7 @@ class database
 
         try {
             $this->dbHandler = new PDO($conn, $this->dbUser, $this->dbPass);
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
             echo $e->getMessage();
         }
     }
@@ -36,5 +36,11 @@ class database
     {
         $this->execute();
         return $this->statement->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function result()
+    {
+        $this->execute();
+        return $this->statement->fetch(PDO::FETCH_OBJ);
     }
 }
