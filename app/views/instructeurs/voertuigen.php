@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,11 +8,12 @@
     <title>Document</title>
     <link rel="stylesheet" href="<?= URLROOT ?>style.css">
 </head>
+
 <body>
     <h1>Door instructeur gebruikte voertuigen</h1>
-    <p>Naam: <?= $data["instructeur"]->voornaam ?> <?= $data["instructeur"]->tussenvoegsel ?> <?=$data["instructeur"]->achternaam ?></p>
+    <p>Naam: <?= $data["instructeur"]->voornaam ?> <?= $data["instructeur"]->tussenvoegsel ?> <?= $data["instructeur"]->achternaam ?></p>
     <p>Datum in dienst: <?= $data["instructeur"]->datumInDienst ?></p>
-    <p>Aantal Sterren: <?= str_repeat("✦", $data["instructeur"]->aantalSterren)?></p>
+    <p>Aantal Sterren: <?= str_repeat("✦", $data["instructeur"]->aantalSterren) ?></p>
     <table>
         <thead>
             <tr>
@@ -24,8 +26,23 @@
             </tr>
         </thead>
         <tbody>
-            
+            <?php
+            foreach ($data["voertuigen"] as $row) {
+            ?>
+                <tr>
+                    <td><?= $row->typevoertuig       ?></td>
+                    <td><?= $row->type               ?></td>
+                    <td><?= $row->kenteken           ?></td>
+                    <td><?= $row->bouwjaar           ?></td>
+                    <td><?= $row->brandstof          ?></td>
+                    <td><?= $row->rijbewijscategorie ?></td>
+                </tr>
+            <?php
+            }
+            ?>
         </tbody>
     </table>
+    <?= $data["geen_voertuigen"] ?>
 </body>
+
 </html>

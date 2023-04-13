@@ -30,9 +30,20 @@ class InstructeursModel
     public function getInstructeur($id)
     {
         $sql = "SELECT * FROM instructeurs ins WHERE ins.id = :id";
-        
+
         $this->db->query($sql);
         $this->db->bindValue(":id", $id);
         return $this->db->result();
+    }
+
+    public function getVoertuigenOf($id)
+    {
+        $sql = "SELECT v.kenteken, v.type, v.bouwjaar, v.brandstof, vt.typevoertuig, vt.rijbewijscategorie FROM voertuiginstructeur vi 
+                INNER JOIN voertuig v ON v.id = vi.voertuigID
+                INNER JOIN typevoertuig vt ON vt.id = v.typevoertuigID
+                WHERE vi.instructeurID = :id";
+        $this->db->query($sql);
+        $this->db->bindValue(":id", $id);
+        return $this->db->resultSet();
     }
 }
