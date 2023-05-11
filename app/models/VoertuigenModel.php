@@ -12,7 +12,7 @@ class VoertuigenModel
     public function getAllVehiclesAndCategory()
     {
         $sql =
-            "SELECT vt.kenteken, vt.type, vt.bouwjaar, vt.brandstof
+            "SELECT vt.id,vt.kenteken, vt.type, vt.bouwjaar, vt.brandstof, tv.typevoertuig, tv.rijbewijscategorie
              FROM voertuig vt
              INNER JOIN typevoertuig tv on vt.typevoertuigID = tv.id";
 

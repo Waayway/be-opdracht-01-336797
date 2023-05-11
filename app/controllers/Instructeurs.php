@@ -37,6 +37,6 @@ class Instructeurs extends BaseController
             "instructeur" => $this->instructeurModel->getInstructeur($id),
             "voertuigen"  => $this->voertuigenModel->getAllVehiclesAndCategory(),
         ];
-        $this->view("instructeurs/toevoegen");
+        $this->view("instructeurs/toevoegen", $data);
     }
 }
