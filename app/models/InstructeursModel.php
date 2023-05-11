@@ -2,7 +2,7 @@
 
 class InstructeursModel
 {
-    private $db;
+    private Database $db;
 
     public function __construct()
     {
@@ -45,5 +45,16 @@ class InstructeursModel
         $this->db->query($sql);
         $this->db->bindValue(":id", $id);
         return $this->db->resultSet();
+    }
+
+    public function bindVoertuigToInstructeur($voertuigID, $instructeurID)
+    {
+        $sql =
+            "INSERT INTO voertuiginstructeur (voertuigID, instructeurID, datumToekenning)
+             VALUES (:vId, :iId, sysdate())";
+        $this->db->query($sql);
+        $this->db->bindValue(":vId", $voertuigID);
+        $this->db->bindValue(":iId", $instructeurID);
+        $this->db->execute();
     }
 }

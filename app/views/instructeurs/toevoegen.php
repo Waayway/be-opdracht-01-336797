@@ -39,7 +39,7 @@
                         <td><?= $row->bouwjaar           ?></td>
                         <td><?= $row->brandstof          ?></td>
                         <td><?= $row->rijbewijscategorie ?></td>
-                        <td><button type="submit" value="<?= $row->id ?>">+</button></td> <!-- Eerste instinct was om een request te sturen met js -->
+                        <td><button type="submit" name="id" value="<?= $row->id ?>">+</button></td> <!-- Eerste instinct was om een request te sturen met js -->
                     </tr>
                 <?php
                 }

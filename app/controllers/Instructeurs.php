@@ -33,10 +33,19 @@ class Instructeurs extends BaseController
     }
     public function toevoegen($id)
     {
+        $extra_data = [];
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (array_key_exists("id", $_POST)) {
+                $extra_data = $this->handle_toevoegen_post($_POST["id"]);
+            }
+        }
         $data = [
             "instructeur" => $this->instructeurModel->getInstructeur($id),
             "voertuigen"  => $this->voertuigenModel->getAllVehiclesAndCategory(),
         ];
         $this->view("instructeurs/toevoegen", $data);
+    }
+    private function handle_toevoegen_post($id)
+    {
     }
 }
