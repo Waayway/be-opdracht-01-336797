@@ -43,6 +43,7 @@
         </tbody>
     </table>
     <?= $data["geen_voertuigen"] ?>
+    <a href="<?= URLROOT ?>instructeurs">Terug</a>
 </body>
 
 </html>

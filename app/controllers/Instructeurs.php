@@ -24,7 +24,7 @@ class Instructeurs extends BaseController
             "geen_voertuigen" => "",
         ];
         if (sizeof($data["voertuigen"]) < 1) {
-            $data["geen_voertuigen"] = "Er zijn op dit moment nog geen voertuigen toegewezen aan deze instructeur";
+            $data["geen_voertuigen"] = "Er zijn op dit moment nog geen voertuigen toegewezen aan deze instructeur<br>";
             header("Refresh: 3; url=" . URLROOT . "instructeurs");
         }
         $this->view("instructeurs/voertuigen", $data);
