@@ -2,10 +2,12 @@
 
 class Instructeurs extends BaseController
 {
-    private $instructeurModel;
+    private InstructeursModel $instructeurModel;
+    private VoertuigenModel  $voertuigenModel;
     public function __construct()
     {
         $this->instructeurModel = $this->model("InstructeursModel");
+        $this->voertuigenModel = $this->model("VoertuigenModel");
     }
     public function index()
     {
@@ -28,5 +30,13 @@ class Instructeurs extends BaseController
             header("Refresh: 3; url=" . URLROOT . "instructeurs");
         }
         $this->view("instructeurs/voertuigen", $data);
+    }
+    public function toevoegen($id)
+    {
+        $data = [
+            "instructeur" => $this->instructeurModel->getInstructeur($id),
+            "voertuigen"  => $this->voertuigenModel->getAllVehiclesAndCategory(),
+        ];
+        $this->view("instructeurs/toevoegen");
     }
 }
