@@ -57,4 +57,16 @@ class InstructeursModel
         $this->db->bindValue(":iId", $instructeurID);
         $this->db->execute();
     }
+    public function checkIfVoertuigAlreadyBound($voertuigID, $instructeurID)
+    {
+        $sql = "SELECT COUNT(*) as num
+                FROM voertuiginstructeur
+                WHERE voertuigID = :vId AND instructeurID = :iId";
+
+        $this->db->query($sql);
+        $this->db->bindValue(":vId", $voertuigID);
+        $this->db->bindValue(":iId", $instructeurID);
+        $res = $this->db->result();
+        return $res->num > 0;
+    }
 }

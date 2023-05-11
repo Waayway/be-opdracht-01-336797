@@ -36,16 +36,23 @@ class Instructeurs extends BaseController
         $extra_data = [];
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (array_key_exists("id", $_POST)) {
-                $extra_data = $this->handle_toevoegen_post($_POST["id"]);
+                $extra_data = $this->handle_toevoegen_post($_POST["id"], $id);
             }
         }
         $data = [
             "instructeur" => $this->instructeurModel->getInstructeur($id),
             "voertuigen"  => $this->voertuigenModel->getAllVehiclesAndCategory(),
+            "extra" => $extra_data
         ];
         $this->view("instructeurs/toevoegen", $data);
     }
-    private function handle_toevoegen_post($id)
+    private function handle_toevoegen_post($voertuigID, $instructeurID)
     {
+        if (!$this->instructeurModel->checkIfVoertuigAlreadyBound($voertuigID, $instructeurID)) {
+            $this->instructeurModel->bindVoertuigToInstructeur($voertuigID, $instructeurID);
+            return ["success" => "Het voertuig is toegevoegd aan de instructeur "];
+        } else {
+            return ["success" => "Het voertuig is al van de instructeur!"];
+        }
     }
 }

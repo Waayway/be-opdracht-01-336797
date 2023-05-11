@@ -11,6 +11,13 @@
 
 <body>
     <h1>Door instructeur gebruikte voertuigen</h1>
+    <?php
+    if (array_key_exists("extra", $data)) {
+        if (array_key_exists("success", $data["extra"])) {
+            echo "<h1>" . $data["extra"]["success"] . "</h1>";
+        }
+    }
+    ?>
     <p>Naam: <?= $data["instructeur"]->voornaam ?> <?= $data["instructeur"]->tussenvoegsel ?> <?= $data["instructeur"]->achternaam ?></p>
     <p>Datum in dienst: <?= $data["instructeur"]->datumInDienst ?></p>
     <p>Aantal Sterren: <?= str_repeat("✦", $data["instructeur"]->aantalSterren) ?></p>
