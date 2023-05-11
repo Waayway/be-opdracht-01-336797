@@ -14,6 +14,7 @@
     <p>Naam: <?= $data["instructeur"]->voornaam ?> <?= $data["instructeur"]->tussenvoegsel ?> <?= $data["instructeur"]->achternaam ?></p>
     <p>Datum in dienst: <?= $data["instructeur"]->datumInDienst ?></p>
     <p>Aantal Sterren: <?= str_repeat("✦", $data["instructeur"]->aantalSterren) ?></p>
+    <a href="<?= URLROOT ?>instructeurs/toevoegen/<?= $data["instructeur"]->id ?>">Voertuigen toevoegen</a>
     <table>
         <thead>
             <tr>

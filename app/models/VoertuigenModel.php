@@ -13,7 +13,7 @@ class VoertuigenModel
     {
         $sql =
             "SELECT vt.kenteken, vt.type, vt.bouwjaar, vt.brandstof
-             FROM voertuigen vt
+             FROM voertuig vt
              INNER JOIN typevoertuig tv on vt.typevoertuigID = tv.id";
 
         $this->db->query($sql);
