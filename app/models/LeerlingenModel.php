@@ -11,9 +11,18 @@ class LeerlingenModel
 
     public function getAllLeerlingenAndLesPakketten()
     {
-        $sql = "SELECT  Id
-                       ,Naam
-                FROM   Country";
+        $sql = "SELECT  ll.voornaam, 
+                        ll.tussenvoegsel, 
+                        ll.achternaam, 
+                        ll.mobiel, 
+                        lp.naam as pakketnaam, 
+                        lp.aantalLessen, 
+                        lp.prijs, 
+                        lpl.startdatumrijlessen as startdatum, 
+                        lpl.datumrijbewijsgehaald FROM lespakketleerling lpl
+                RIGHT JOIN leerling ll ON ll.id = lpl.leerlingID
+                INNER JOIN lespakket lp ON lp.id = lpl.lespakketID;
+        ";
 
         $this->db->query($sql);
 

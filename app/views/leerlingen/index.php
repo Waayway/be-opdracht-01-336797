@@ -11,6 +11,32 @@
 
 <body>
     <h1>Overzicht rijpakketten leerlingen</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Naam</th>
+                <th>Mobiel</th>
+                <th>Pakketnaam</th>
+                <th>Aantal lessen</th>
+                <th>Prijs</th>
+                <th>StartDatum</th>
+                <th>Datum Rijbewijs</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($data["data"] as $row) { ?>
+                <tr>
+                    <td><?= $row->voornaam . " " ?><?= ($row->tussenvoegsel != null) ? $row->tussenvoegsel . " " : "" ?><?= $row->achternaam ?></td>
+                    <td><?= $row->mobiel ?></td>
+                    <td><?= $row->pakketnaam ?></td>
+                    <td><?= $row->aantalLessen ?></td>
+                    <td><?= $row->prijs ?></td>
+                    <td><?= $row->startdatum ?></td>
+                    <td><?= $row->datumrijbewijsgehaald ?></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
 </body>
 
 </html>

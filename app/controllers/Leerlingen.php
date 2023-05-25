@@ -10,7 +10,9 @@ class Leerlingen extends BaseController
     }
     public function index()
     {
-        $data = [];
+        $data = [
+            "data" => $this->leerlingenModel->getAllLeerlingenAndLesPakketten()
+        ];
 
         $this->view('leerlingen/index', $data);
     }
