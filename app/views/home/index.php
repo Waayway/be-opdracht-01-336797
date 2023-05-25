@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,8 +8,11 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <h1>Rij school</h1>
-    <a href="<?= URLROOT ?>instructeurs">Instructeurs</a> | 
+    <a href="<?= URLROOT ?>instructeurs">Instructeurs</a> |
+    <a href="<?= URLROOT ?>leerlingen">Overzicht lespakketten leerlingen</a> |
 </body>
+
 </html>
