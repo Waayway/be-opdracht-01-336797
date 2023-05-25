@@ -21,7 +21,8 @@ class LeerlingenModel
                         lpl.startdatumrijlessen as startdatum, 
                         lpl.datumrijbewijsgehaald FROM lespakketleerling lpl
                 RIGHT JOIN leerling ll ON ll.id = lpl.leerlingID
-                INNER JOIN lespakket lp ON lp.id = lpl.lespakketID;
+                INNER JOIN lespakket lp ON lp.id = lpl.lespakketID
+                ORDER BY lpl.startdatumrijlessen ASC;
         ";
 
         $this->db->query($sql);
