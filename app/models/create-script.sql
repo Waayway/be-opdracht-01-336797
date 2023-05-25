@@ -124,3 +124,91 @@ VALUES
 (3,     4,  "2022-08-01"),
 (5,     1,  "2019-08-30"),
 (10,    5,  "2020-02-02");
+
+
+
+-- - Proeftoets aanvullung,
+
+-- - Step 10 Create table lespakket
+
+CREATE TABLE IF NOT EXISTS lespakket (
+    id                  TINYINT UNSIGNED    NOT NULL    AUTO_INCREMENT,
+    naam                VARCHAR(50)         NOT NULL,
+    aantalLessen        TINYINT UNSIGNED    NOT NULL,
+    rijbewijscategorie  VARCHAR(2)          NOT NULL,
+    prijs               DECIMAL(6,2)        NOT NULL,
+    CONSTRAINT PK_lespakketID PRIMARY KEY CLUSTERED(id)
+) ENGINE=InnoDB;
+
+-- - Step 11 Insert data into table lespakket
+-- Id (PK)	Pakket Naam	AantalLessen	Rijbewijscategorie	Prijs
+-- 1	Personenauto Extra	40	B	2700
+-- 2	Vrachtwagen Subliem	60	C	5400
+-- 3	Bus Extraordinaire	80	D	7300
+-- 4	Bromfiets Deluxe	10	AM	230
+
+INSERT INTO lespakket (id, naam, aantalLessen, rijbewijscategorie, prijs) VALUES 
+(1, "Personenauto Extra", 40, "B", 2700),
+(2, "Vrachtwagen Subliem", 60, "C", 5400),
+(3, "Bus Extraordinaire", 80, "D", 7300),
+(4, "Bromfiets Deluxe", 10, "AM", 230);
+
+
+
+-- - Step 12 Create table leerling
+
+CREATE TABLE IF NOT EXISTS leerling (
+id                  TINYINT UNSIGNED    NOT NULL    AUTO_INCREMENT,
+voornaam            VARCHAR(50)         NOT NULL,
+tussenvoegsel       VARCHAR(10)         NULL,
+achternaam          VARCHAR(50)         NOT NULL,
+mobiel              CHAR(12)            NOT NULL,
+CONSTRAINT PK_leerlingID PRIMARY KEY CLUSTERED(id)
+) ENGINE=InnoDB;
+
+-- - Step 13 Insert data into table leerling
+-- Id(PK)	Voornaam	Tussenvoegsel	Achternaam	Mobiel
+-- 1	Bas	De	Bakker	06-28493827
+-- 2	Terence		Draaijer	06-39398734
+-- 3	Samuel		Werchter	06-24383291
+-- 4	Sharida		Tetehuka	06-48293823
+
+-- 5	Fatma		Yilmaz	06-34291234
+
+INSERT INTO leerling (id, voornaam, tussenvoegsel, achternaam, mobiel) VALUES
+(1, "Bas", "De", "Bakker", "06-28493827"),
+(2, "Terence", null, "Draaijer", "06-39398734"),
+(3, "Samuel", null, "Werchter", "06-24383291"),
+(4, "Sharida", null, "Tetehuka", "06-48293823"),
+(5, "Fatma", null, "Yilmaz", "06-34291234");
+
+-- - Step 14 Create linking table lespakket-leerling
+
+CREATE TABLE IF NOT EXISTS lespakketleerling (
+    id                      TINYINT UNSIGNED    NOT NULL    AUTO_INCREMENT,
+    lespakketID             TINYINT UNSIGNED    NOT NULL,
+    leerlingID              TINYINT UNSIGNED    NOT NULL,
+    startdatumrijlessen     DATE                NOT NULL,
+    datumrijbewijsgehaald   DATE                NULL,
+    CONSTRAINT PK_lespakketleerlingID PRIMARY KEY CLUSTERED(id),
+    CONSTRAINT FK_lespakketID FOREIGN KEY (lespakketID) REFERENCES lespakket(id),
+    CONSTRAINT FK_leerlingID FOREIGN KEY (leerlingID) REFERENCES leerling(id)
+) ENGINE=InnoDB;
+
+-- - Step 15 Insert data into table lespakket-leerling
+-- Id (PK)	LesPakketId (FK)	LeerlingId (FK)	StartDatumRijlessen	DatumRijbewijsBehaald
+-- 1	1	5	23-05-2023	NULL
+-- 2	4	1	3-06-2022	5-8-2022
+-- 3	1	1	2-06-2023	NULL
+-- 4	3	4	1-01-2023	NULL
+-- 5	5	2	30-11-2022	23-05-2023
+-- 6	2	3	06-06-2022	06-06-2023
+
+
+INSERT INTO lespakketleerling (lespakketID, leerlingID, startdatumrijlessen, datumrijbewijsgehaald) VALUES
+(1, 5, "2023-05-23", null),
+(4, 1, "2022-06-03", "2022-08-05"),
+(1, 1, "2023-06-02", null),
+(3, 4, "2023-01-01", null),
+(1, 2, "2022-11-30", "2023-05-23"),
+(2, 3, "2022-06-06", "2023-06-06");
