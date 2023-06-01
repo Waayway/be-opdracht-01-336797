@@ -212,3 +212,70 @@ INSERT INTO lespakketleerling (lespakketID, leerlingID, startdatumrijlessen, dat
 (3, 4, "2023-01-01", null),
 (1, 2, "2022-11-30", "2023-05-23"),
 (2, 3, "2022-06-06", "2023-06-06");
+
+
+-- # Toets toevoeging
+-- - Step 16 Create table examinator
+
+CREATE TABLE IF NOT EXISTS examinator (
+    id                 TINYINT UNSIGNED    NOT NULL    AUTO_INCREMENT,
+    voornaam           VARCHAR(50)         NOT NULL,
+    tussenvoegsel      VARCHAR(10)         NULL,
+    achternaam         VARCHAR(50)         NOT NULL,
+    mobiel             CHAR(11)            NOT NULL,
+    CONSTRAINT PK_examinatorID PRIMARY KEY CLUSTERED(id)
+) ENGINE=InnoDB;
+
+-- - Step 17 Insert data into table examinator
+
+INSERT INTO examinator (voornaam, tussenvoegsel, achternaam, mobiel) VALUES
+("Manuel", "van", "Meekeren", "06-28493823"),
+("Lissette", "den", "Dongen", "06-24383299"),
+("Jurswailly", null, "Luciano", "06-48293846"),
+("Naswha",null,"Salawi","06-34291219");
+
+-- - Step 18 Create table examen
+
+CREATE TABLE IF NOT EXISTS examen (
+    id                 TINYINT UNSIGNED    NOT NULL    AUTO_INCREMENT,
+    studentId          INT UNSIGNED        NOT NULL UNIQUE,
+    rijschool          VARCHAR(200)        NOT NULL,
+    stad               VARCHAR(50)         NOT NULL,
+    rijbewijscategorie VARCHAR(2)          NOT NULL,
+    datum              DATE                NOT NULL,
+    uitslag            BOOLEAN             NOT NULL,
+    CONSTRAINT PK_examenID PRIMARY KEY CLUSTERED(id)
+) ENGINE=InnoDB;
+
+-- - Step 19 Insert data into table examen
+
+INSERT INTO examen (studentId, rijschool, stad, rijbewijscategorie, datum, uitslag) VALUES
+(100234, "VolGasVooruit", "Rotterdam", "B", "2023-04-03", true),
+(123432, "InZijnVierDoorDeBocht", "Sliedrecht", "C", "2023-03-01", true),
+(103234, "LinksomRechtsom", "Dordrecht", "D", "2023-05-15", true),
+(106452, "OpDeVluchtStrook", "Zwijndrecht", "AM", "2023-05-08", false),
+(104546, "RechtDoorEnGaan", "Rotterdam", "B", "2023-04-17", false),
+(100333, "AltijdGeslaagd", "Dordrecht", "B", "2023-05-12", true),
+(124444, "RijlesVoorJou", "Rotterdam", "B", "2023-04-12", true);
+
+-- - Step 20 Create table examenPerExaminator
+
+CREATE TABLE IF NOT EXISTS examenPerExaminator (
+    id                TINYINT UNSIGNED    NOT NULL    AUTO_INCREMENT,
+    examenId          TINYINT UNSIGNED    NOT NULL,
+    examinatorId      TINYINT UNSIGNED    NOT NULL,
+    CONSTRAINT PK_examenPerExaminatorID PRIMARY KEY CLUSTERED(id),
+    CONSTRAINT FK_examenId FOREIGN KEY (examenId) REFERENCES examen(id),
+    CONSTRAINT FK_examinatorId FOREIGN KEY (examinatorId) REFERENCES examinator(id)
+) ENGINE=InnoDB;
+
+-- - Step 21 Insert data into table examenPerExaminator
+
+INSERT INTO examenPerExaminator (examenId, examinatorId) VALUES 
+(1, 3),
+(3, 3),
+(2, 2),
+(4, 1),
+(7, 3),
+(6, 2),
+(5, 4);
