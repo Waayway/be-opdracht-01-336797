@@ -2,10 +2,12 @@
 
 class Instructeurs extends BaseController
 {
-    private $instructeurModel;
+    private InstructeursModel $instructeurModel;
+    private VoertuigenModel  $voertuigenModel;
     public function __construct()
     {
         $this->instructeurModel = $this->model("InstructeursModel");
+        $this->voertuigenModel = $this->model("VoertuigenModel");
     }
     public function index()
     {
@@ -28,5 +30,29 @@ class Instructeurs extends BaseController
             header("Refresh: 3; url=" . URLROOT . "instructeurs");
         }
         $this->view("instructeurs/voertuigen", $data);
+    }
+    public function toevoegen($id)
+    {
+        $extra_data = [];
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (array_key_exists("id", $_POST)) {
+                $extra_data = $this->handle_toevoegen_post($_POST["id"], $id);
+            }
+        }
+        $data = [
+            "instructeur" => $this->instructeurModel->getInstructeur($id),
+            "voertuigen"  => $this->voertuigenModel->getAllVehiclesAndCategory(),
+            "extra" => $extra_data
+        ];
+        $this->view("instructeurs/toevoegen", $data);
+    }
+    private function handle_toevoegen_post($voertuigID, $instructeurID)
+    {
+        if (!$this->instructeurModel->checkIfVoertuigAlreadyBound($voertuigID, $instructeurID)) {
+            $this->instructeurModel->bindVoertuigToInstructeur($voertuigID, $instructeurID);
+            return ["success" => "Het voertuig is toegevoegd aan de instructeur "];
+        } else {
+            return ["success" => "Het voertuig is al van de instructeur!"];
+        }
     }
 }
