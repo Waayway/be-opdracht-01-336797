@@ -32,7 +32,7 @@
                     <td><?= $examinator->rijbewijscategorie ?></td>
                     <td><?= $examinator->rijschool ?></td>
                     <td><?= $examinator->stad ?></td>
-                    <td><?= $examinator->uitslag ?></td>
+                    <td><?= $examinator->uitslag . "/" . $examinator->total ?></td>
                 </tr>
             <?php
             }
