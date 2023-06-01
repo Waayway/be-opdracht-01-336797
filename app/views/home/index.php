@@ -13,6 +13,7 @@
     <h1>Rij school</h1>
     <a href="<?= URLROOT ?>instructeurs">Instructeurs</a> |
     <a href="<?= URLROOT ?>leerlingen">Overzicht lespakketten leerlingen</a> |
+    <a href="<?= URLROOT ?>examinator">Overzicht Afgenomen examinatoren</a> |
 </body>
 
 </html>
